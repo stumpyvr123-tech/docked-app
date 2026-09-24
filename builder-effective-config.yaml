@@ -1,0 +1,14 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.noah.dockedapp
+mac:
+  target: dmg
+win:
+  target: nsis
+nsis:
+  oneClick: true
+  perMachine: false
+  allowToChangeInstallationDirectory: false
+files: []
+electronVersion: 30.5.1
