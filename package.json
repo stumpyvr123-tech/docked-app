@@ -1,0 +1,32 @@
+{
+  "name": "docked-app",
+  "version": "1.0.2npm ",
+  "description": "My Electron Application",
+  "main": "main.js",
+  "author": "Noah Burrelli",
+  "license": "ISC",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --mac"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "30.0.0",
+    "electron-builder": "24.13.3"
+  },
+  "overrides": {
+    "yauzl": "^3.3.1"
+  },
+  "build": {
+    "appId": "com.noah.dockedapp",
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  },
+  "allowScripts": {
+    "electron@30.0.0": true
+  }
+}

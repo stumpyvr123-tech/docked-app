@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Weather</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --border: #cccccc;
+      --sub: #555555;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+
+    .widget {
+      width: 100%;
+      max-width: 260px;
+      border: 1px solid var(--border);
+      padding: 16px;
+      text-align: center;
+    }
+
+    .location {
+      font-size: 14px;
+      font-weight: bold;
+      margin: 0 0 6px;
+      min-height: 18px;
+    }
+
+    .temp {
+      font-size: 36px;
+      margin: 4px 0;
+    }
+
+    .cond {
+      font-size: 14px;
+      color: var(--sub);
+      margin: 0 0 14px;
+      min-height: 18px;
+    }
+
+    .zip-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    input {
+      flex: 1;
+      font-size: 13px;
+      padding: 4px 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    button {
+      font-size: 13px;
+      padding: 4px 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .note {
+      font-size: 10px;
+      color: var(--sub);
+      margin-top: 8px;
+      min-height: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="widget">
+    <p class="location" id="loc">New Castle, PA 16105</p>
+    <div class="temp" id="temp">--</div>
+    <p class="cond" id="cond">getting data.</p>
+    <div class="zip-row">
+      <input type="text" id="zipInput" placeholder="Enter zip" maxlength="5">
+      <button id="goBtn">Search (enter)</button>
+    </div>
+    <p class="note" id="note"></p>
+  </div>
+
+  <script>
+    const locEl = document.getElementById('loc');
+    const tempEl = document.getElementById('temp');
+    const condEl = document.getElementById('cond');
+    const noteEl = document.getElementById('note');
+    const zipInput = document.getElementById('zipInput');
+    const goBtn = document.getElementById('goBtn');
+
+    // Maps Open-Meteo's numeric weather codes to a plain-English condition.
+    function describeCode(code) {
+      const map = {
+        0: 'Clear',
+        1: 'Mostly Clear',
+        2: 'Partly Cloudy',
+        3: 'Cloudy',
+        45: 'Fog',
+        48: 'Fog',
+        51: 'Light Drizzle',
+        53: 'Drizzle',
+        55: 'Heavy Drizzle',
+        61: 'Light Rain',
+        63: 'Rain',
+        65: 'Heavy Rain',
+        71: 'Light Snow',
+        73: 'Snow',
+        75: 'Heavy Snow',
+        80: 'Rain Showers',
+        81: 'Rain Showers',
+        82: 'Heavy Showers',
+        95: 'Thunderstorm',
+        96: 'Thunderstorm',
+        99: 'Thunderstorm'
+      };
+      return map[code] || 'Unknown';
+    }
+
+    async function lookup(zip) {
+      goBtn.disabled = true;
+      condEl.textContent = 'Getting weather data from https://api.zippopotam.us/us/' + zip +
+        ' and https://api.open-meteo.com/v1/forecast...';
+      noteEl.textContent = '';
+      try {
+        // 1. Zip -> lat/lon + place name (free, no key, US only)
+        const geoRes = await fetch('https://api.zippopotam.us/us/' + zip);
+        if (!geoRes.ok) {
+          condEl.textContent = 'Not found';
+          noteEl.textContent = 'No location for that zip.';
+          return;
+        }
+        const geo = await geoRes.json();
+        const place = geo.places && geo.places[0];
+        if (!place) {
+          condEl.textContent = 'err: not found ';
+          noteEl.textContent = 'Error - No place data.';
+          return;
+        }
+        const lat = place.latitude;
+        const lon = place.longitude;
+        const cityState = place['place name'] + ', ' + place['state abbreviation'];
+
+        // 2. lat/lon -> current weather (free, no key)
+        const wxUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat +
+          '&longitude=' + lon + '&current=temperature_2m,weather_code&temperature_unit=fahrenheit';
+        const wxRes = await fetch(wxUrl);
+        if (!wxRes.ok) {
+          condEl.textContent = 'There was an API error';
+          noteEl.textContent = 'Uh Oh, something went wrong with the weather search-up..';
+          return;
+        }
+        const wx = await wxRes.json();
+        const cur = wx.current;
+
+        locEl.textContent = cityState + ' ' + zip;
+        tempEl.textContent = Math.round(cur.temperature_2m) + '\u00b0';
+        condEl.textContent = describeCode(cur.weather_code);
+      } catch (err) {
+        condEl.textContent = 'Error';
+        noteEl.textContent = String(err && err.message ? err.message : err);
+      } finally {
+        goBtn.disabled = false;
+      }
+    }
+
+    goBtn.addEventListener('click', () => {
+      const zip = zipInput.value.trim();
+      if (/^\d{5}$/.test(zip)) {
+        lookup(zip);
+      } else {
+        noteEl.textContent = 'Enter at least 5 numbers for a zip code.';
+      }
+    });
+
+    zipInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') goBtn.click();
+    });
+
+    lookup('16105');
+  </script>
+</body>
+
+</html>

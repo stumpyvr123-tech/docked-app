@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>app name</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body style="text-align:center;">
+    <div class="app">
+        <h1>DOCKED - Personlized Widgets</h1>
+
+
+        <button onclick="window.location.href='tips.html'" class="custom-btn">Widgets</button>
+
+
+    </div>
+
+
+
+
+
+    <script src=" script.js"></script>
+
+    <style>
+        .custom-btn {
+            width: 130px;
+            height: 40px;
+            color: #030000;
+            padding: 10px 25px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+                7px 7px 20px 0px rgba(0, 0, 0, .1),
+                4px 4px 5px 0px rgba(0, 0, 0, .1);
+            outline: none;
+        }
+
+        .btn-1 {
+            background: rgb(6, 14, 131);
+            background: linear-gradient(0deg, rgba(6, 14, 131, 1) 0%, rgba(12, 25, 180, 1) 100%);
+            border: none;
+        }
+
+        .btn-1:hover {
+            background: rgb(0, 3, 255);
+            background: linear-gradient(0deg, rgb(0, 17, 255) 0%, rgba(2, 126, 251, 1) 100%);
+        }
+
+
+
+        /* From Uiverse.io by Lucaasbre */
+        .button-menu {
+            cursor: pointer;
+            position: absolute;
+            z-index: 1;
+            background-color: #ffdd00;
+            border: 2px solid #1e1e1e;
+            color: #1e1e1e;
+            font-size: 30px;
+            font-weight: 700;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            -webkit-box-shadow: 0px 3px 10px 0px rgba(16, 16, 16, 0.5);
+            -moz-box-shadow: 0px 3px 10px 0px rgba(16, 16, 16, 0.5);
+            box-shadow: 0px 3px 10px 0px rgba(16, 16, 16, 0.5);
+        }
+
+        .checkbox {
+            width: 60px;
+            height: 60px;
+            opacity: 0;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        .option {
+            position: absolute;
+            background-color: #1e1e1e;
+            border: 2px solid #ffdd00;
+            color: #ffdd00;
+            z-index: -1;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            -webkit-box-shadow: 3px 3px 10px 0px rgba(16, 16, 16, 0.5);
+            -moz-box-shadow: 3px 3px 10px 0px rgba(16, 16, 16, 0.5);
+            box-shadow: 3px 3px 10px 0px rgba(16, 16, 16, 0.5);
+        }
+
+        .checkbox:hover~.button-menu,
+        .checkbox:checked~.button-menu {
+            background-color: #eccd00;
+            scale: 0.98;
+            box-shadow: none;
+        }
+
+        .checkbox:not(:checked)~.button-menu::before {
+            content: "+";
+        }
+
+        .checkbox:checked~.button-menu::after {
+            content: "-";
+            scale: 0.98;
+            box-shadow: none;
+        }
+
+        .checkbox:not(:checked)~.option {
+            box-shadow: none;
+        }
+
+        .option:hover,
+        .option:active,
+        .option:focus {
+            box-shadow: none;
+            scale: 0.98;
+        }
+
+        .checkbox:checked~.option-a {
+            transition-delay: 0.1s;
+            transform: translateY(-70px);
+        }
+
+        .checkbox:checked~.option-b {
+            transition-delay: 0.2s;
+            transform: translateY(-140px);
+        }
+
+        .checkbox:checked~.option-c {
+            transition-delay: 0.3s;
+            transform: translateY(-210px);
+        }
+
+        /* From Uiverse.io by javierBarroso */
+        .wrapper {
+            --background: #ed8f0b;
+            --icon-color: #ffae00;
+            --shape-color-01: #b8cbee;
+            --shape-color-02: #7691e8;
+            --shape-color-03: #fdd053;
+            --width: 90px;
+            --height: 90px;
+            --border-radius: var(--height);
+            width: var(--width);
+            height: var(--height);
+            position: relative;
+            border-radius: var(--border-radius);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 350px;
+            margin-left: 600px;
+        }
+
+        .wrapper .btn {
+            background: var(--background);
+            width: var(--width);
+            height: var(--height);
+            position: relative;
+            z-index: 3;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            -webkit-animation: plus-animation-reverse 0.5s ease-out forwards;
+            animation: plus-animation-reverse 0.5s ease-out forwards;
+        }
+
+        .wrapper .btn::before,
+        .wrapper .btn::after {
+            content: "";
+            display: block;
+            position: absolute;
+            border-radius: 4px;
+            background: #fff;
+        }
+
+        .wrapper .btn::before {
+            width: 4px;
+            height: 28px;
+        }
+
+        .wrapper .btn::after {
+            width: 28px;
+            height: 4px;
+        }
+
+        .wrapper .tooltip {
+            width: fit-content;
+            height: 75px;
+            border-radius: 70px;
+            position: absolute;
+            background: #fff;
+            z-index: 2;
+            padding: 20px 35px;
+            box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
+            opacity: 0;
+            top: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            transition: opacity 0.15s ease-in, top 0.15s ease-in, width 0.15s ease-in;
+        }
+
+        .wrapper .tooltip>span {
+            position: relative;
+            width: 100%;
+            white-space: nowrap;
+            opacity: 0;
+        }
+
+        .wrapper .tooltip>svg {
+            width: 100%;
+            height: 26px;
+            display: block;
+            justify-content: space-around;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .wrapper .tooltip>svg .icon {
+            fill: none;
+            stroke: var(--icon-color);
+            stroke-width: 2px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .wrapper .tooltip>svg:hover .icon {
+            opacity: 1;
+        }
+
+        .wrapper .tooltip::after {
+            content: "";
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 3px;
+            position: absolute;
+            left: 50%;
+            margin-left: -10px;
+            bottom: -8px;
+            transform: rotate(45deg);
+            z-index: 0;
+        }
+
+        .wrapper>svg {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            z-index: 1;
+            transform: scale(0);
+        }
+
+        .wrapper>svg .shape {
+            fill: none;
+            stroke: none;
+            stroke-width: 3px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transform-origin: 50% 20%;
+        }
+
+        .wrapper input {
+            height: 100%;
+            width: 100%;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            position: absolute;
+            z-index: 5;
+            opacity: 0;
+        }
+
+        .wrapper input:checked~svg {
+            -webkit-animation: pang-animation 1.2s ease-out forwards;
+            animation: pang-animation 1.2s ease-out forwards;
+        }
+
+        .wrapper input:checked~svg .shape:nth-of-type(1) {
+            transform: translate(25px, 30%) rotate(40deg);
+        }
+
+        .wrapper input:checked~svg .shape:nth-of-type(2) {
+            transform: translate(-4px, 30%) rotate(80deg);
+        }
+
+        .wrapper input:checked~svg .shape:nth-of-type(3) {
+            transform: translate(12px, 30%) rotate(120deg);
+        }
+
+        .wrapper input:checked~svg .shape:nth-of-type(4) {
+            transform: translate(8px, 30%) rotate(160deg);
+        }
+
+        .wrapper input:checked~svg .shape:nth-of-type(5) {
+            transform: translate(21px, 30%) rotate(200deg);
+        }
+
+        .wrapper input:checked~svg .shape:nth-of-type(6) {
+            transform: translate(0px, 30%) rotate(240deg);
+        }
+
+        .wrapper input:checked~svg .shape:nth-of-type(7) {
+            transform: translate(17px, 30%) rotate(280deg);
+        }
+
+        .wrapper input:checked~svg .shape:nth-of-type(8) {
+            transform: translate(-3px, 30%) rotate(320deg);
+        }
+
+        .wrapper input:checked~svg .shape:nth-of-type(9) {
+            transform: translate(25px, 30%) rotate(360deg);
+        }
+
+        .wrapper input:checked~.btn {
+            -webkit-animation: plus-animation 0.5s ease-out forwards;
+            animation: plus-animation 0.5s ease-out forwards;
+        }
+
+        .wrapper input:checked~.tooltip {
+            width: fit-content;
+            padding: 30px;
+            -webkit-animation: stretch-animation 1s ease-out forwards 0.15s;
+            animation: stretch-animation 1s ease-out forwards 0.15s;
+            top: -90px;
+            opacity: 1;
+        }
+
+        .wrapper input:checked~.tooltip>span {
+            opacity: 1;
+        }
+
+        @-webkit-keyframes pang-animation {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pang-animation {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 0;
+            }
+        }
+
+        @-webkit-keyframes plus-animation {
+            0% {
+                transform: rotate(0) scale(1);
+            }
+
+            20% {
+                transform: rotate(60deg) scale(0.93);
+            }
+
+            55% {
+                transform: rotate(35deg) scale(0.97);
+            }
+
+            80% {
+                transform: rotate(48deg) scale(0.94);
+            }
+
+            100% {
+                transform: rotate(45deg) scale(0.95);
+            }
+        }
+
+        @keyframes plus-animation {
+            0% {
+                transform: rotate(0) scale(1);
+            }
+
+            20% {
+                transform: rotate(60deg) scale(0.93);
+            }
+
+            55% {
+                transform: rotate(35deg) scale(0.97);
+            }
+
+            80% {
+                transform: rotate(48deg) scale(0.94);
+            }
+
+            100% {
+                transform: rotate(45deg) scale(0.95);
+            }
+        }
+
+        @-webkit-keyframes plus-animation-reverse {
+            0% {
+                transform: rotate(45deg) scale(0.95);
+            }
+
+            20% {
+                transform: rotate(-15deg);
+            }
+
+            55% {
+                transform: rotate(10deg);
+            }
+
+            80% {
+                transform: rotate(-3deg);
+            }
+
+            100% {
+                transform: rotate(0) scale(1);
+            }
+        }
+
+        @keyframes plus-animation-reverse {
+            0% {
+                transform: rotate(45deg) scale(0.95);
+            }
+
+            20% {
+                transform: rotate(-15deg);
+            }
+
+            55% {
+                transform: rotate(10deg);
+            }
+
+            80% {
+                transform: rotate(-3deg);
+            }
+
+            100% {
+                transform: rotate(0) scale(1);
+            }
+        }
+
+        @-webkit-keyframes stretch-animation {
+            0% {
+                transform: scale(1, 1);
+            }
+
+            10% {
+                transform: scale(1.1, 0.9);
+            }
+
+            30% {
+                transform: scale(0.9, 1.1);
+            }
+
+            50% {
+                transform: scale(1.05, 0.95);
+            }
+
+            100% {
+                transform: scale(1, 1);
+            }
+        }
+
+        @keyframes stretch-animation {
+            0% {
+                transform: scale(1, 1);
+            }
+
+            10% {
+                transform: scale(1.1, 0.9);
+            }
+
+            30% {
+                transform: scale(0.9, 1.1);
+            }
+
+            50% {
+                transform: scale(1.05, 0.95);
+            }
+
+            100% {
+                transform: scale(1, 1);
+            }
+        }
+
+        .socials {
+            position: fixed;
+            display: block;
+            left: 20px;
+            bottom: 20px;
+        }
+
+        .socials>a {
+            display: block;
+            width: 30px;
+            opacity: 0.2;
+            transform: scale(var(--scale, 0.8));
+            transition: transform 0.3s cubic-bezier(0.38, -0.12, 0.24, 1.91);
+        }
+
+        .socials>a:hover {
+            --scale: 1;
+        }
+    </style>
+
+    <!-- From Uiverse.io by javierBarroso -->
+    <div class="wrapper">
+        <input type="checkbox" />
+        <div class="btn"></div>
+        <div class="tooltip"><svg></svg><a class="custom-btn" href="help.html">Help</a></div>
+        <svg></svg>
+    </div>
+
+</body>
+
+</html>

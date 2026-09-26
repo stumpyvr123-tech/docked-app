@@ -1,0 +1,39 @@
+* {
+	font-family: Arial, sans-serif !important;
+}
+
+body {
+	text-align: center;
+	background-color: #c75a12 !important;
+}
+
+.clock-container {
+	background-color: #c75a12 !important;
+}
+
+a:not(:has(img)),
+button {
+	display: inline-block;
+	padding: 10px 16px;
+	border: 1px solid #d96d12;
+	border-radius: 4px;
+	background-color: #f28c28 !important;
+	background-image: none !important;
+	box-shadow: none !important;
+	color: #000 !important;
+	font-family: Arial, sans-serif !important;
+	text-decoration: none;
+	cursor: pointer;
+	transition: none !important;
+}
+
+a:not(:has(img)):hover,
+button:hover {
+	background-color: #df7415 !important;
+}
+
+a:not(:has(img)):focus-visible,
+button:focus-visible {
+	outline: 2px solid #000;
+	outline-offset: 2px;
+}

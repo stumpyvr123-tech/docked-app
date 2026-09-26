@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+</head>
+
+<body>
+    <link rel="stylesheet" href="styles.css">
+    <div class="clock-container">
+        <div id="clock">Unable to get time!</div>
+    </div>
+
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+
+            // Determine AM or PM
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+
+            // Convert to 12-hour format
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+
+            // Add leading zeros to numbers less than 10
+            const paddedHours = String(hours).padStart(2, '0');
+            const paddedMinutes = String(minutes).padStart(2, '0');
+            const paddedSeconds = String(seconds).padStart(2, '0');
+
+            // Display the result
+            const timeString = `${paddedHours}:${paddedMinutes}:${paddedSeconds} ${ampm}`;
+            document.getElementById('clock').textContent = timeString;
+        }
+
+        // Run every second
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+
+
+    <style>
+        .clock-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000000;
+            /* Change background color */
+        }
+
+        #clock {
+            font-family: 'Courier New', monospace;
+            /* Change font */
+            font-size: 3rem;
+            /* Change size */
+            color: #0b45c2;
+            /* Change text color */
+            background: #000000;
+            /* Box background */
+            padding: 20px 40px;
+            border-radius: 10px;
+            border: 2px solid #0901ff;
+            /* Border customization */
+            letter-spacing: 2px;
+        }
+    </style>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>loading</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .tip-container {
+            position: relative;
+            text-align: center;
+            max-width: 400px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        /* Base style for all tips */
+        .tip {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            opacity: 0;
+            animation: showTip 500ms infinite;
+        }
+
+
+
+
+
+
+        @keyframes showTip {
+            0% {
+                opacity: 1;
+                z-index: 2;
+            }
+
+
+        }
+    </style>
+</head>
+
+<body style="text-align: center;">
+
+    <div class="tip-container">
+
+        <h1 style="margin-top: 250px;">hang tight. </h1>
+        <div class="loader">
+            <div class="justify-content-center jimu-primary-loading"></div>
+        </div>
+
+
+        <style>
+            /* From Uiverse.io by barisdogansutcu */
+            svg {
+                width: 3.25em;
+                transform-origin: center;
+                animation: rotate4 2s linear infinite;
+            }
+
+            circle {
+                fill: none;
+                stroke: hsl(214, 97%, 59%);
+                stroke-width: 2;
+                stroke-dasharray: 1, 200;
+                stroke-dashoffset: 0;
+                stroke-linecap: round;
+                animation: dash4 1.5s ease-in-out infinite;
+            }
+
+            @keyframes rotate4 {
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes dash4 {
+                0% {
+                    stroke-dasharray: 1, 200;
+                    stroke-dashoffset: 0;
+                }
+
+                50% {
+                    stroke-dasharray: 90, 200;
+                    stroke-dashoffset: -35px;
+                }
+
+                100% {
+                    stroke-dashoffset: -125px;
+                }
+            }
+        </style>
+
+        <!-- From Uiverse.io by barisdogansutcu -->
+        <svg viewBox="25 25 50 50">
+            <circle r="20" cy="50" cx="50"></circle>
+        </svg>
+
+        <script>
+            setTimeout(() => {
+                window.location.href = "widget1g.html";
+            }, 1300);
+        </script>
+</body>
+
+</html>

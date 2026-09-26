@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="date-widget" class="widget-box"> _________________ </div>
+
+    <script>
+        // Wait for 1 second (1000 milliseconds) before showing the date
+        setTimeout(() => {
+            const widget = document.getElementById('date-widget');
+            const today = new Date();
+
+            // Format the date (e.g., "Friday, September 25, 2026")
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+            const formattedDate = today.toLocaleDateString('en-US', options);
+
+            // Update the widget text and remove the loading style if needed
+            widget.textContent = formattedDate;
+            widget.classList.add('loaded');
+        }, 400);
+    </script>
+
+
+    <style>
+        .widget-box {
+            width: 300px;
+            height: 100px;
+            border: 2px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin: 50px auto;
+            background-color: #f0f0f0;
+        }
+
+        .loaded {
+            background-color: #d4edda;
+            /* Light green background when loaded */
+        }
+    </style>
+    <a href="language.html">Switch language</a>
+    <a href="widgets.html">Back</a>
+
+</body>
+
+</html>
