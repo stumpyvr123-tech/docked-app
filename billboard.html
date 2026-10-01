@@ -1,0 +1,148 @@
+<style>
+    /* 1. The main Billboard Background (mimics a wood/cork frame board) */
+    .billboard-board {
+        background-color: #2b1810;
+        /* Dark wood frame color */
+        border: 12px solid #1a0d07;
+        /* Thick wooden frame edge */
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8), 0 10px 30px rgba(0, 0, 0, 0.5);
+
+        /* This sets up a 3-column grid to hold your sticky notes perfectly */
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 25px;
+        max-width: 1000px;
+        margin: 30px auto;
+        font-family: Arial, sans-serif;
+        box-sizing: border-box;
+    }
+
+    /* 2. Base styles for the 10 Sticky Notes */
+    .sticky-note {
+        background-color: #fef08a;
+        /* Classic sticky note yellow */
+        color: #1e293b;
+        /* Dark ink text */
+        padding: 20px;
+        min-height: 200px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        position: relative;
+        box-sizing: border-box;
+        transition: transform 0.2s ease;
+    }
+
+    /* Gives the sticky notes a realistic tilt so they look hand-pinned */
+    .sticky-note:nth-child(odd) {
+        transform: rotate(-2deg);
+    }
+
+    .sticky-note:nth-child(even) {
+        transform: rotate(1.5deg);
+    }
+
+    .sticky-note:nth-child(3n) {
+        transform: rotate(2.5deg);
+    }
+
+    /* The push-pin at the top of each note */
+    .sticky-note::before {
+        content: "📌";
+        position: absolute;
+        top: -10px;
+        left: 45%;
+        font-size: 18px;
+    }
+
+    /* 3. Special Halloween Spooky Notes */
+    .sticky-note.halloween-theme {
+        background-color: #ff781e;
+        /* Pumpkin Orange */
+        color: #ffffff;
+    }
+
+    .sticky-note.halloween-theme::before {
+        content: "🎃";
+        /* Replaces the pin with a pumpkin! */
+    }
+
+    /* 4. Inside Text Formatting */
+    .sticky-note h3 {
+        margin-top: 5px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        border-bottom: 1px dashed rgba(0, 0, 0, 0.15);
+        padding-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .sticky-note.halloween-theme h3 {
+        border-bottom-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .sticky-note p {
+        font-size: 13px;
+        line-height: 1.5;
+        margin: 0 0 8px 0;
+    }
+</style>
+
+<!-- THE LITERAL BILLBOARD CONTAINER -->
+<div class="billboard-board">
+
+    <!-- NOTE 1: MAIN VERSION HEADER -->
+    <div class="sticky-note halloween-theme">
+        <h3>🎃 RELEASE v2.0</h3>
+        <p>The BIG Halloween and Widget update is officially LIVE!</p>
+        <p><a href="patch-notes.html">Click here to view the new update notes!</a></p>
+    </div>
+
+    <!-- NOTE 2: TIMER PATCH NOTES -->
+    <div class="sticky-note">
+        <h3>ANNOUNCMENT!</h3>
+        <p>Hello guys! Welcome to Docked Widgets' BIG v2 update!! I am SUPER excited to bring this update to you! What
+            do you think V3 will be???</p>
+        <p>Fixed frame delays.</p>
+    </div>
+
+    <!-- NOTE 3: WEATHER TRACKER -->
+    <div class="sticky-note">
+        <h3>🌤️ WEATHER DATA</h3>
+        <p> in regards of the weather widget, currently it just doesn't work right now. I am trying to figure out an
+            active fix, but I might remove it because I don't like it in general. If I do add it back, it's probably
+            gonna track your exact location and ask for location permissions, but for now you can discard that and
+            pretend like it's not a thing</p>
+    </div>
+
+    <!-- NOTE 4: LANGUAGE WIDGET -->
+    <div class="sticky-note">
+        <h3>🌍 BIOLINGUAL INFORMATION</h3>
+        <p> this app is only supported in English and some pages in Spanish. All the content and media will be in
+            English, US, Canada, and United Kingdom, and Australia. I am sorry if you are French or German</p>
+    </div>
+
+    <!-- NOTE 5: USER MANUAL -->
+    <div class="sticky-note">
+        <h3>THE BASICS:</h3>
+        <p>1. Open app workspace.</p>
+        <p>2. Arrange your widget grids.</p>
+        <p>3. Use custom features safely.</p>
+    </div>
+
+    <!-- NOTE 6: FUTURE DIRECTIVES -->
+    <div class="sticky-note halloween-theme">
+        <h3>👻 DEV GOALS</h3>
+        <p>Next feature expansion: ADD MORE WIDGETS! .</p>
+    </div>
+
+    <!-- NOTE 7: EMPTY SLOT (Put whatever you want here!) -->
+    <div class="sticky-note">
+        <h3>Note: respect</h3>
+        <p>Please do NOT be mean to users/people who use the app or associated with the app. </p>
+    </div>
+
+
+
+</div>

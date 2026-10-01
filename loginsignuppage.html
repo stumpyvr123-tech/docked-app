@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in | Docked</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth.css">
+    <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script defer src="firebase-config.js"></script>
+    <script defer src="app-auth.js"></script>
+    <script defer src="auth-page.js"></script>
+</head>
+
+<body class="auth-page">
+    <main class="auth-shell">
+        <a class="auth-home-link" href="index.html">&larr; Docked home</a>
+        <section class="auth-panel" aria-labelledby="auth-title">
+            <div class="auth-heading">
+                <p class="auth-eyebrow">DOCKED ACCOUNT</p>
+                <h1 id="auth-title">Sign in with Google</h1>
+                <p>Use your Google account to continue to Docked.</p>
+            </div>
+
+            <div id="signed-in-panel" class="signed-in-panel" hidden>
+                <span class="signed-in-mark" aria-hidden="true">&#10003;</span>
+                <div>
+                    <h2 id="signed-in-title">Signed in already</h2>
+                    <p id="signed-in-email"></p>
+                </div>
+                <button type="button" id="auth-signout-button">Sign out</button>
+            </div>
+
+            <section id="name-prompt-panel" class="name-prompt-panel" hidden aria-labelledby="name-prompt-title">
+                <h2 id="name-prompt-title">What would you like us to call you?</h2>
+                <p>This name will appear on your Docked account.</p>
+                <form id="preferred-name-form" class="auth-form">
+                    <label for="preferred-name">Your name</label>
+                    <input id="preferred-name" name="displayName" autocomplete="nickname" maxlength="80" required>
+                    <button class="auth-primary" type="submit">Continue</button>
+                </form>
+            </section>
+
+            <div id="auth-controls">
+                <button type="button" class="google-button" id="google-signin-button">
+                    <span class="google-mark" aria-hidden="true">G</span>
+                    Continue with Google
+                </button>
+                <button type="button" class="guest-button" id="guest-signin-button">Continue as guest</button>
+            </div>
+            <p class="auth-message" id="auth-message" role="status" aria-live="polite">
+                <span class="auth-loader" id="auth-loader" aria-hidden="true" hidden>
+                    <span></span><span></span><span></span>
+                </span>
+                <span id="auth-message-text"></span>
+            </p>
+            <p class="auth-message is-error" id="firebase-owner-status" role="status" hidden>Sign-in is not set up yet.
+                Contact the Docked app owner.</p>
+        </section>
+
+        <details class="profile-options" id="profile-options" hidden>
+            <summary>Profile options</summary>
+            <div>
+                <form id="profile-name-form" class="auth-form">
+                    <label for="profile-name">Display name</label>
+                    <input id="profile-name" autocomplete="nickname" maxlength="80" required>
+                    <button class="auth-primary" type="submit">Save name</button>
+                </form>
+            </div>
+        </details>
+
+    </main>
+</body>
+
+</html>
