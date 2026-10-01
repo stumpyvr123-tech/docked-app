@@ -3,16 +3,201 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>app name</title>
     <link rel="stylesheet" href="styles.css" />
+    <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script defer src="firebase-config.js"></script>
+    <script defer src="app-auth.js"></script>
+    <script defer src="home-auth.js"></script>
 </head>
 
 <body style="text-align:center;">
+    <header class="home-toolbar">
+        <details class="account-menu" id="account-menu">
+            <summary class="account-trigger" aria-label="Login and account options">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M20 21a8 8 0 0 0-16 0M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" /></svg>
+                <span id="account-trigger-label">Login</span>
+            </summary>
+            <div class="account-dropdown">
+                <p class="account-email" id="account-email">Not signed in</p>
+                <a href="loginsignuppage.html">Sign in / Sign up</a>
+                <a href="loginsignuppage.html#profile-options">Options</a>
+                <button type="button" id="account-info-button">Info</button>
+                <button type="button" id="account-signout-button" hidden>Sign out</button>
+            </div>
+        </details>
+    </header>
     <div class="app">
         <h1>DOCKED - Personlized Widgets</h1>
 
 
-        <button onclick="window.location.href='tips.html'" class="custom-btn">Widgets</button>
+
+
+
+
+
+
+        <!-- Keep your red banner at the top of your body -->
+        <div
+            style="background-color: #f28c28; color: #24170f; padding: 0px; text-align: center; font-family: Arial, sans-serif; display: block; border-radius: 6px; margin-bottom: 20px;">
+            <h1>New Update!</h1>
+
+            <a style="padding: 0px;" href="patch-notes.html" class="custom-btn">Patch Notes</a>
+        </div>
+
+        <div
+            style="background-color: rgb(34, 255, 0); color: white; padding: 0px; text-align: center; font-family: Arial, sans-serif; display: block; border-radius: 6px; margin-bottom: 20px;">
+            <h1>Feature: Sign In / Sign Up</h1>
+            <p id="home-auth-status" role="status">Sign in to connect your Docked account.</p>
+
+            <a style="padding: 0px;" href="loginsignuppage.html" class="custom-btn" id="home-auth-link">Sign Up / Sign
+                In</a>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+    </div>
+
+    <button onclick="window.location.href='widgets.html'" class="custom-btn">View Widgets</button>
+    <button onclick="window.location.href='help.html'" class="custom-btn">User Guide(s)</button>
+    <button onclick="window.location.href='billboard.html'" class="custom-btn">Bulletin</button>
+    <style>
+        /* 1. This matches your EXACT shape, font, and completely flat style */
+        .exit-wrapper {
+            width: 130px;
+            height: 40px;
+            color: #030000;
+            font-family: Arial, sans-serif;
+            /* Standard font choice */
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            /* Keeps the sliding animation inside the box */
+            border-radius: 6px;
+
+            /* MATCHED STYLING: Changes it from a heavy 3D look to match your exact flat buttons */
+            background-color: #f98426;
+            /* The exact matching orange of your other buttons */
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            /* Soft, flat border edge */
+            box-shadow: none;
+            /* Deletes the heavy drop-shadow completely */
+
+            box-sizing: border-box;
+            vertical-align: top;
+        }
+
+        /* Hides the secret trigger switch */
+        .toggle-trigger {
+            display: none;
+        }
+
+        /* 2. Base configuration for the inside sliding faces */
+        .btn-face {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        /* First State: Just the normal flat EXIT text face */
+        .first-face {
+            z-index: 2;
+            background-color: transparent;
+        }
+
+        /* Second State: The confirmation split choices panel */
+        .confirm-panel {
+            z-index: 1;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transform: translateY(100%);
+            /* Kept hidden downstairs by default */
+            transition: transform 0.3s ease;
+        }
+
+        /* Perfectly splits the choices 50/50 inside your 130px button width */
+        .confirm-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .no-btn {
+            background-color: #fc9b00;
+        }
+
+        /* Clean Gray for X */
+        .yes-btn {
+            background-color: #ef4444;
+        }
+
+        /* Danger Red for Checkmark */
+
+        /* 3. The sliding physics triggers */
+        .toggle-trigger:checked~.first-face {
+            transform: translateY(-100%);
+            /* Slides the word "EXIT" up out of view */
+        }
+
+        .toggle-trigger:checked~.confirm-panel {
+            transform: translateY(0);
+            /* Slides the X/✓ choices up into the button footprint */
+        }
+    </style>
+
+    <!-- THE CLEAN COMPONENT ROW -->
+    <div class="exit-wrapper">
+        <!-- Secret tracking switch -->
+        <input type="checkbox" id="exit-check" class="toggle-trigger">
+
+        <!-- The front button face -->
+        <label for="exit-check" class="btn-face first-face">
+            EXIT
+        </label>
+
+        <!-- The inside choices panel -->
+        <div class="confirm-panel">
+            <label for="exit-check" class="confirm-btn no-btn">❌</label>
+            <button class="confirm-btn yes-btn" onclick="window.close()">✅</button>
+        </div>
+    </div>
 
 
     </div>
@@ -20,6 +205,13 @@
 
 
 
+    <dialog id="account-info-dialog" class="account-dialog">
+        <form method="dialog" class="dialog-close-row"><button aria-label="Close">Close</button></form>
+        <h2>Login information</h2>
+        <p id="account-info-content">You are not signed in.</p>
+        <p class="auth-note">Your account is managed by Firebase. Your sign-in session is saved by Firebase on this
+            device.</p>
+    </dialog>
 
     <script src=" script.js"></script>
 
@@ -533,13 +725,7 @@
         }
     </style>
 
-    <!-- From Uiverse.io by javierBarroso -->
-    <div class="wrapper">
-        <input type="checkbox" />
-        <div class="btn"></div>
-        <div class="tooltip"><svg></svg><a class="custom-btn" href="help.html">Help</a></div>
-        <svg></svg>
-    </div>
+
 
 </body>
 
