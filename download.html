@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docked | Downloads</title>
+</head>
+
+<body>
+    <style>
+        body {
+            font-family: arial;
+            text-align: center;
+        }
+
+        .button {
+            position: relative;
+            width: 150px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            border: 1px solid #17795E;
+            background-color: #209978;
+            overflow: hidden;
+        }
+
+        .button,
+        .button__icon,
+        .button__text {
+            transition: all 0.3s;
+        }
+
+        .button .button__text {
+            transform: translateX(22px);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .button .button__icon {
+            position: absolute;
+            transform: translateX(109px);
+            height: 100%;
+            width: 39px;
+            background-color: #17795E;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button .svg {
+            width: 20px;
+            fill: #fff;
+        }
+
+        .button:hover {
+            background: #17795E;
+        }
+
+        .button:hover .button__text {
+            color: transparent;
+        }
+
+        .button:hover .button__icon {
+            width: 148px;
+            transform: translateX(0);
+        }
+
+        .button:active .button__icon {
+            background-color: #146c54;
+        }
+
+        .button:active {
+            border: 1px solid #146c54;
+        }
+
+        .text-container {
+            text-align: center;
+            /* Centers the button horizontally */
+        }
+
+        .center-wrapper {
+            display: grid;
+            place-items: center;
+            /* Centers perfectly horizontally and vertically */
+
+            /* Forces container to take the full screen height */
+            width: 100%;
+            /* Forces container to take full width */
+        }
+
+        /* Your existing wrapper (without min-height, as requested!) */
+        .center-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            /* Adds space between the two buttons */
+            flex-wrap: wrap;
+            /* Allows them to stack on mobile screens safely */
+            width: 100%;
+        }
+
+        /* Base style for both buttons */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            /* Space between the logo icon and text */
+            padding: 12px 24px;
+            font-family: sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        /* Specific styling for Mac button */
+        .mac-btn {
+            background-color: #222222;
+        }
+
+        .mac-btn:hover {
+            background-color: #444444;
+        }
+
+        /* Specific styling for Windows button */
+        .windows-btn {
+            background-color: #0078d4;
+        }
+
+        .windows-btn:hover {
+            background-color: #106ebe;
+        }
+
+        /* Size for the platform icons inside the buttons */
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Small click animation effect */
+        .download-btn:active {
+            transform: scale(0.98);
+        }
+
+        button {
+            display: flex;
+            height: 3em;
+            width: 100px;
+            align-items: center;
+            justify-content: center;
+            background-color: #eeeeee4b;
+            border-radius: 3px;
+            letter-spacing: 1px;
+            transition: all 0.2s linear;
+            cursor: pointer;
+            border: none;
+            background: #00aaf9;
+        }
+
+        button>svg {
+            margin-right: 5px;
+            margin-left: 5px;
+            font-size: 20px;
+            transition: all 0.4s ease-in;
+        }
+
+        button:hover>svg {
+            font-size: 1.2em;
+            transform: translateX(-5px);
+        }
+
+        button:hover {
+            box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+            transform: translateY(-2px);
+        }
+    </style>
+
+
+    <h1>Docked | Download</h1>
+    <h2>Download Docked for Mac and Windows </h2>
+
+    <div class="center-wrapper">
+        <!-- Mac Download Button -->
+        <a href="https://mega.nz/file/TGYyUIiL#Du-WSdDIaur4T51fYRzCB_W-NvYxi14DAK1b0KuqG3g"
+            download="docked-app Setup 2.0.0.dmg" class="download-btn mac-btn">
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M18.71,19.5C17.88,20.74 17,21.95 15.66,22C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.1,16.67C20.08,16.74 19.67,18.11 18.71,19.5M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1C16,1.04 14.9,1.6 14.24,2.38C13.68,3.04 13.19,4.14 13.34,5.39C14.39,5.47 15.4,4.88 15.97,4.17Z" />
+            </svg>
+            Download for Mac
+        </a>
+
+        <!-- Windows Download Button -->
+        <a href="https://mega.nz/file/2f4FGSRb#9Y6oK27OjGP3U35cwmlO3pCuI8NeGQEqWGFo8-h-XSo"
+            download="docked-app Setup 2.0.0.exe" class="download-btn windows-btn">
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M0,3.44L9.75,2.1V11.3H0V3.44M0,12.7H9.75V21.9L0,20.56V12.7M11.15,1.91L24,0V11.3H11.15V1.91M11.15,12.7H24V24L11.15,22.1V12.7Z" />
+            </svg>
+            Download for Windows
+        </a>
+        <a href="index.html">
+            <button>
+                <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
+                    <path
+                        d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z">
+                    </path>
+                </svg>
+                <span>Back</span>
+            </button>
+        </a>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>

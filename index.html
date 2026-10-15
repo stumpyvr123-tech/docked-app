@@ -2,730 +2,128 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>app name</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-    <script defer src="firebase-config.js"></script>
-    <script defer src="app-auth.js"></script>
-    <script defer src="home-auth.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docked | Home</title>
 </head>
 
-<body style="text-align:center;">
-    <header class="home-toolbar">
-        <details class="account-menu" id="account-menu">
-            <summary class="account-trigger" aria-label="Login and account options">
-                <svg aria-hidden="true" viewBox="0 0 24 24">
-                    <path d="M20 21a8 8 0 0 0-16 0M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" /></svg>
-                <span id="account-trigger-label">Login</span>
-            </summary>
-            <div class="account-dropdown">
-                <p class="account-email" id="account-email">Not signed in</p>
-                <a href="loginsignuppage.html">Sign in / Sign up</a>
-                <a href="loginsignuppage.html#profile-options">Options</a>
-                <button type="button" id="account-info-button">Info</button>
-                <button type="button" id="account-signout-button" hidden>Sign out</button>
-            </div>
-        </details>
-    </header>
-    <div class="app">
-        <h1>DOCKED - Personlized Widgets</h1>
-
-
-
-
-
-
-
-
-        <!-- Keep your red banner at the top of your body -->
-        <div
-            style="background-color: #f28c28; color: #24170f; padding: 0px; text-align: center; font-family: Arial, sans-serif; display: block; border-radius: 6px; margin-bottom: 20px;">
-            <h1>New Update!</h1>
-
-            <a style="padding: 0px;" href="patch-notes.html" class="custom-btn">Patch Notes</a>
-        </div>
-
-        <div
-            style="background-color: rgb(34, 255, 0); color: white; padding: 0px; text-align: center; font-family: Arial, sans-serif; display: block; border-radius: 6px; margin-bottom: 20px;">
-            <h1>Feature: Sign In / Sign Up</h1>
-            <p id="home-auth-status" role="status">Sign in to connect your Docked account.</p>
-
-            <a style="padding: 0px;" href="loginsignuppage.html" class="custom-btn" id="home-auth-link">Sign Up / Sign
-                In</a>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-
-
-    </div>
-
-    <button onclick="window.location.href='widgets.html'" class="custom-btn">View Widgets</button>
-    <button onclick="window.location.href='help.html'" class="custom-btn">User Guide(s)</button>
-    <button onclick="window.location.href='billboard.html'" class="custom-btn">Bulletin</button>
+<body>
     <style>
-        /* 1. This matches your EXACT shape, font, and completely flat style */
-        .exit-wrapper {
-            width: 130px;
-            height: 40px;
-            color: #030000;
-            font-family: Arial, sans-serif;
-            /* Standard font choice */
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            display: inline-block;
-            overflow: hidden;
-            /* Keeps the sliding animation inside the box */
-            border-radius: 6px;
-
-            /* MATCHED STYLING: Changes it from a heavy 3D look to match your exact flat buttons */
-            background-color: #f98426;
-            /* The exact matching orange of your other buttons */
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            /* Soft, flat border edge */
-            box-shadow: none;
-            /* Deletes the heavy drop-shadow completely */
-
-            box-sizing: border-box;
-            vertical-align: top;
-        }
-
-        /* Hides the secret trigger switch */
-        .toggle-trigger {
-            display: none;
-        }
-
-        /* 2. Base configuration for the inside sliding faces */
-        .btn-face {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
-            box-sizing: border-box;
-        }
-
-        /* First State: Just the normal flat EXIT text face */
-        .first-face {
-            z-index: 2;
-            background-color: transparent;
-        }
-
-        /* Second State: The confirmation split choices panel */
-        .confirm-panel {
-            z-index: 1;
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transform: translateY(100%);
-            /* Kept hidden downstairs by default */
-            transition: transform 0.3s ease;
-        }
-
-        /* Perfectly splits the choices 50/50 inside your 130px button width */
-        .confirm-btn {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-            border: none;
-            cursor: pointer;
-            color: white;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        .no-btn {
-            background-color: #fc9b00;
-        }
-
-        /* Clean Gray for X */
-        .yes-btn {
-            background-color: #ef4444;
-        }
-
-        /* Danger Red for Checkmark */
-
-        /* 3. The sliding physics triggers */
-        .toggle-trigger:checked~.first-face {
-            transform: translateY(-100%);
-            /* Slides the word "EXIT" up out of view */
-        }
-
-        .toggle-trigger:checked~.confirm-panel {
-            transform: translateY(0);
-            /* Slides the X/✓ choices up into the button footprint */
-        }
-    </style>
-
-    <!-- THE CLEAN COMPONENT ROW -->
-    <div class="exit-wrapper">
-        <!-- Secret tracking switch -->
-        <input type="checkbox" id="exit-check" class="toggle-trigger">
-
-        <!-- The front button face -->
-        <label for="exit-check" class="btn-face first-face">
-            EXIT
-        </label>
-
-        <!-- The inside choices panel -->
-        <div class="confirm-panel">
-            <label for="exit-check" class="confirm-btn no-btn">❌</label>
-            <button class="confirm-btn yes-btn" onclick="window.close()">✅</button>
-        </div>
-    </div>
-
-
-    </div>
-
-
-
-
-    <dialog id="account-info-dialog" class="account-dialog">
-        <form method="dialog" class="dialog-close-row"><button aria-label="Close">Close</button></form>
-        <h2>Login information</h2>
-        <p id="account-info-content">You are not signed in.</p>
-        <p class="auth-note">Your account is managed by Firebase. Your sign-in session is saved by Firebase on this
-            device.</p>
-    </dialog>
-
-    <script src=" script.js"></script>
-
-    <style>
-        .custom-btn {
-            width: 130px;
-            height: 40px;
-            color: #030000;
-            padding: 10px 25px;
-            font-family: 'Lato', sans-serif;
-            font-weight: 500;
-            background: transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            display: inline-block;
-            box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
-                7px 7px 20px 0px rgba(0, 0, 0, .1),
-                4px 4px 5px 0px rgba(0, 0, 0, .1);
-            outline: none;
-        }
-
-        .btn-1 {
-            background: rgb(6, 14, 131);
-            background: linear-gradient(0deg, rgba(6, 14, 131, 1) 0%, rgba(12, 25, 180, 1) 100%);
-            border: none;
-        }
-
-        .btn-1:hover {
-            background: rgb(0, 3, 255);
-            background: linear-gradient(0deg, rgb(0, 17, 255) 0%, rgba(2, 126, 251, 1) 100%);
-        }
-
-
-
-        /* From Uiverse.io by Lucaasbre */
-        .button-menu {
-            cursor: pointer;
-            position: absolute;
-            z-index: 1;
-            background-color: #ffdd00;
-            border: 2px solid #1e1e1e;
-            color: #1e1e1e;
-            font-size: 30px;
-            font-weight: 700;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        body {
+            font-family: arial;
             text-align: center;
-            -webkit-box-shadow: 0px 3px 10px 0px rgba(16, 16, 16, 0.5);
-            -moz-box-shadow: 0px 3px 10px 0px rgba(16, 16, 16, 0.5);
-            box-shadow: 0px 3px 10px 0px rgba(16, 16, 16, 0.5);
         }
 
-        .checkbox {
-            width: 60px;
-            height: 60px;
-            opacity: 0;
-            z-index: 10;
+        .button {
+            position: relative;
+            width: 150px;
+            height: 40px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            border: 1px solid #17795E;
+            background-color: #209978;
+            overflow: hidden;
         }
 
-        .option {
-            position: absolute;
-            background-color: #1e1e1e;
-            border: 2px solid #ffdd00;
-            color: #ffdd00;
-            z-index: -1;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: 700;
+        .button,
+        .button__icon,
+        .button__text {
             transition: all 0.3s;
-            -webkit-box-shadow: 3px 3px 10px 0px rgba(16, 16, 16, 0.5);
-            -moz-box-shadow: 3px 3px 10px 0px rgba(16, 16, 16, 0.5);
-            box-shadow: 3px 3px 10px 0px rgba(16, 16, 16, 0.5);
         }
 
-        .checkbox:hover~.button-menu,
-        .checkbox:checked~.button-menu {
-            background-color: #eccd00;
-            scale: 0.98;
-            box-shadow: none;
+        .button .button__text {
+            transform: translateX(22px);
+            color: #fff;
+            font-weight: 600;
         }
 
-        .checkbox:not(:checked)~.button-menu::before {
-            content: "+";
-        }
-
-        .checkbox:checked~.button-menu::after {
-            content: "-";
-            scale: 0.98;
-            box-shadow: none;
-        }
-
-        .checkbox:not(:checked)~.option {
-            box-shadow: none;
-        }
-
-        .option:hover,
-        .option:active,
-        .option:focus {
-            box-shadow: none;
-            scale: 0.98;
-        }
-
-        .checkbox:checked~.option-a {
-            transition-delay: 0.1s;
-            transform: translateY(-70px);
-        }
-
-        .checkbox:checked~.option-b {
-            transition-delay: 0.2s;
-            transform: translateY(-140px);
-        }
-
-        .checkbox:checked~.option-c {
-            transition-delay: 0.3s;
-            transform: translateY(-210px);
-        }
-
-        /* From Uiverse.io by javierBarroso */
-        .wrapper {
-            --background: #ed8f0b;
-            --icon-color: #ffae00;
-            --shape-color-01: #b8cbee;
-            --shape-color-02: #7691e8;
-            --shape-color-03: #fdd053;
-            --width: 90px;
-            --height: 90px;
-            --border-radius: var(--height);
-            width: var(--width);
-            height: var(--height);
-            position: relative;
-            border-radius: var(--border-radius);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 350px;
-            margin-left: 600px;
-        }
-
-        .wrapper .btn {
-            background: var(--background);
-            width: var(--width);
-            height: var(--height);
-            position: relative;
-            z-index: 3;
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            -webkit-animation: plus-animation-reverse 0.5s ease-out forwards;
-            animation: plus-animation-reverse 0.5s ease-out forwards;
-        }
-
-        .wrapper .btn::before,
-        .wrapper .btn::after {
-            content: "";
-            display: block;
+        .button .button__icon {
             position: absolute;
-            border-radius: 4px;
-            background: #fff;
-        }
-
-        .wrapper .btn::before {
-            width: 4px;
-            height: 28px;
-        }
-
-        .wrapper .btn::after {
-            width: 28px;
-            height: 4px;
-        }
-
-        .wrapper .tooltip {
-            width: fit-content;
-            height: 75px;
-            border-radius: 70px;
-            position: absolute;
-            background: #fff;
-            z-index: 2;
-            padding: 20px 35px;
-            box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
-            opacity: 0;
-            top: 0;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            transition: opacity 0.15s ease-in, top 0.15s ease-in, width 0.15s ease-in;
-        }
-
-        .wrapper .tooltip>span {
-            position: relative;
-            width: 100%;
-            white-space: nowrap;
-            opacity: 0;
-        }
-
-        .wrapper .tooltip>svg {
-            width: 100%;
-            height: 26px;
-            display: block;
-            justify-content: space-around;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .wrapper .tooltip>svg .icon {
-            fill: none;
-            stroke: var(--icon-color);
-            stroke-width: 2px;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            opacity: 0.4;
-            transition: opacity 0.3s ease;
-        }
-
-        .wrapper .tooltip>svg:hover .icon {
-            opacity: 1;
-        }
-
-        .wrapper .tooltip::after {
-            content: "";
-            width: 20px;
-            height: 20px;
-            background: #fff;
-            border-radius: 3px;
-            position: absolute;
-            left: 50%;
-            margin-left: -10px;
-            bottom: -8px;
-            transform: rotate(45deg);
-            z-index: 0;
-        }
-
-        .wrapper>svg {
-            width: 300px;
-            height: 300px;
-            position: absolute;
-            z-index: 1;
-            transform: scale(0);
-        }
-
-        .wrapper>svg .shape {
-            fill: none;
-            stroke: none;
-            stroke-width: 3px;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            transform-origin: 50% 20%;
-        }
-
-        .wrapper input {
+            transform: translateX(109px);
             height: 100%;
+            width: 39px;
+            background-color: #17795E;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button .svg {
+            width: 20px;
+            fill: #fff;
+        }
+
+        .button:hover {
+            background: #17795E;
+        }
+
+        .button:hover .button__text {
+            color: transparent;
+        }
+
+        .button:hover .button__icon {
+            width: 148px;
+            transform: translateX(0);
+        }
+
+        .button:active .button__icon {
+            background-color: #146c54;
+        }
+
+        .button:active {
+            border: 1px solid #146c54;
+        }
+
+        .text-container {
+            text-align: center;
+            /* Centers the button horizontally */
+        }
+
+        .center-wrapper {
+            display: grid;
+            place-items: center;
+            /* Centers perfectly horizontally and vertically */
+
+            /* Forces container to take the full screen height */
             width: 100%;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            position: absolute;
-            z-index: 5;
-            opacity: 0;
+            /* Forces container to take full width */
         }
 
-        .wrapper input:checked~svg {
-            -webkit-animation: pang-animation 1.2s ease-out forwards;
-            animation: pang-animation 1.2s ease-out forwards;
+        .button-link {
+            text-decoration: none;
+            color: rgb(239, 236, 236);
+            background-color: blue;
+            border: 1px solid black;
+            padding: 10px 20px;
+            border-radius: 5px;
+
         }
 
-        .wrapper input:checked~svg .shape:nth-of-type(1) {
-            transform: translate(25px, 30%) rotate(40deg);
-        }
-
-        .wrapper input:checked~svg .shape:nth-of-type(2) {
-            transform: translate(-4px, 30%) rotate(80deg);
-        }
-
-        .wrapper input:checked~svg .shape:nth-of-type(3) {
-            transform: translate(12px, 30%) rotate(120deg);
-        }
-
-        .wrapper input:checked~svg .shape:nth-of-type(4) {
-            transform: translate(8px, 30%) rotate(160deg);
-        }
-
-        .wrapper input:checked~svg .shape:nth-of-type(5) {
-            transform: translate(21px, 30%) rotate(200deg);
-        }
-
-        .wrapper input:checked~svg .shape:nth-of-type(6) {
-            transform: translate(0px, 30%) rotate(240deg);
-        }
-
-        .wrapper input:checked~svg .shape:nth-of-type(7) {
-            transform: translate(17px, 30%) rotate(280deg);
-        }
-
-        .wrapper input:checked~svg .shape:nth-of-type(8) {
-            transform: translate(-3px, 30%) rotate(320deg);
-        }
-
-        .wrapper input:checked~svg .shape:nth-of-type(9) {
-            transform: translate(25px, 30%) rotate(360deg);
-        }
-
-        .wrapper input:checked~.btn {
-            -webkit-animation: plus-animation 0.5s ease-out forwards;
-            animation: plus-animation 0.5s ease-out forwards;
-        }
-
-        .wrapper input:checked~.tooltip {
-            width: fit-content;
-            padding: 30px;
-            -webkit-animation: stretch-animation 1s ease-out forwards 0.15s;
-            animation: stretch-animation 1s ease-out forwards 0.15s;
-            top: -90px;
-            opacity: 1;
-        }
-
-        .wrapper input:checked~.tooltip>span {
-            opacity: 1;
-        }
-
-        @-webkit-keyframes pang-animation {
-            0% {
-                transform: scale(0);
-                opacity: 0;
-            }
-
-            40% {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            100% {
-                transform: scale(1.1);
-                opacity: 0;
-            }
-        }
-
-        @keyframes pang-animation {
-            0% {
-                transform: scale(0);
-                opacity: 0;
-            }
-
-            40% {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            100% {
-                transform: scale(1.1);
-                opacity: 0;
-            }
-        }
-
-        @-webkit-keyframes plus-animation {
-            0% {
-                transform: rotate(0) scale(1);
-            }
-
-            20% {
-                transform: rotate(60deg) scale(0.93);
-            }
-
-            55% {
-                transform: rotate(35deg) scale(0.97);
-            }
-
-            80% {
-                transform: rotate(48deg) scale(0.94);
-            }
-
-            100% {
-                transform: rotate(45deg) scale(0.95);
-            }
-        }
-
-        @keyframes plus-animation {
-            0% {
-                transform: rotate(0) scale(1);
-            }
-
-            20% {
-                transform: rotate(60deg) scale(0.93);
-            }
-
-            55% {
-                transform: rotate(35deg) scale(0.97);
-            }
-
-            80% {
-                transform: rotate(48deg) scale(0.94);
-            }
-
-            100% {
-                transform: rotate(45deg) scale(0.95);
-            }
-        }
-
-        @-webkit-keyframes plus-animation-reverse {
-            0% {
-                transform: rotate(45deg) scale(0.95);
-            }
-
-            20% {
-                transform: rotate(-15deg);
-            }
-
-            55% {
-                transform: rotate(10deg);
-            }
-
-            80% {
-                transform: rotate(-3deg);
-            }
-
-            100% {
-                transform: rotate(0) scale(1);
-            }
-        }
-
-        @keyframes plus-animation-reverse {
-            0% {
-                transform: rotate(45deg) scale(0.95);
-            }
-
-            20% {
-                transform: rotate(-15deg);
-            }
-
-            55% {
-                transform: rotate(10deg);
-            }
-
-            80% {
-                transform: rotate(-3deg);
-            }
-
-            100% {
-                transform: rotate(0) scale(1);
-            }
-        }
-
-        @-webkit-keyframes stretch-animation {
-            0% {
-                transform: scale(1, 1);
-            }
-
-            10% {
-                transform: scale(1.1, 0.9);
-            }
-
-            30% {
-                transform: scale(0.9, 1.1);
-            }
-
-            50% {
-                transform: scale(1.05, 0.95);
-            }
-
-            100% {
-                transform: scale(1, 1);
-            }
-        }
-
-        @keyframes stretch-animation {
-            0% {
-                transform: scale(1, 1);
-            }
-
-            10% {
-                transform: scale(1.1, 0.9);
-            }
-
-            30% {
-                transform: scale(0.9, 1.1);
-            }
-
-            50% {
-                transform: scale(1.05, 0.95);
-            }
-
-            100% {
-                transform: scale(1, 1);
-            }
-        }
-
-        .socials {
-            position: fixed;
-            display: block;
-            left: 20px;
-            bottom: 20px;
-        }
-
-        .socials>a {
-            display: block;
-            width: 30px;
-            opacity: 0.2;
-            transform: scale(var(--scale, 0.8));
-            transition: transform 0.3s cubic-bezier(0.38, -0.12, 0.24, 1.91);
-        }
-
-        .socials>a:hover {
-            --scale: 1;
+        .button-link:hover {
+            background-color: darkblue;
+            border: 1px solid black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: rgb(253, 253, 253);
+            text-decoration: none;
         }
     </style>
 
 
+    <h1>Docked | App</h1>
+    <h2>Docked: Widgets that enhance your experience.</h2>
+    <p>Perfect for the desktop while working!</p>
+    <div class="center-wrapper">
+
+        <a href="download.html">
+            <button class="button-link">Downloads</button>
+        </a>
+
+        <a href="docs.html">
+            <button class="button-link">Read the Docs</button>
+        </a>
+    </div>
 
 </body>
 
